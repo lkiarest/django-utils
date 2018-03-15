@@ -6,6 +6,7 @@ from datetime import datetime
 from django.db.models import Model
 from datetime import datetime, date
 import decimal
+from uuid import UUID
 
 # 提取对象指定的属性值（list）生成 dict 对象
 def make_obj_json(obj, attrs):
@@ -18,7 +19,8 @@ def make_obj_json(obj, attrs):
             val = val.strftime('%Y-%m-%d %H:%M:%S')
         elif isinstance(val, date):
             val = val.strftime('%Y-%m-%d')
-        elif isinstance(val, decimal.Decimal):
+        elif isinstance(val, decimal.Decimal) or \
+                isinstance(val, UUID):
             val = str(val)
 
         json_obj[attr] = val
